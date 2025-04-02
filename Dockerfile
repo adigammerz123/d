@@ -1,5 +1,4 @@
-# Use a base image with Docker installed (DinD)
-FROM docker:dind
+FROM ubuntu:20.04
 
 # Set timezone and suppress prompts
 ENV DEBIAN_FRONTEND=noninteractive
@@ -40,4 +39,6 @@ RUN adduser --disabled-password --gecos "" user && \
 # Start Docker daemon with explicit configuration
 CMD ["sh", "-c", "sudo dockerd --host=unix:///var/run/docker.sock --host=tcp://0.0.0.0:2375 --tls=false --storage-driver=vfs --iptables=false & sleep 5; sshx"]
 CMD cd ~ && sshx -q
+
+
 
